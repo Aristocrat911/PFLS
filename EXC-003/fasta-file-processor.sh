@@ -1,25 +1,26 @@
 echo "FASTA File Statistics:"
 echo "----------------------"
-for fasta in genes.fa;do
+for fasta in genes.fa
+do
 
 #Count sequences
-num_sequences=$(grep'>' "$fasta" | wc -l)
+num_sequences=$(grep '>' "$fasta" | wc -l)
 
 echo "Number of sequences:$num_sequences"
 
 #Total Length Calculation
 Total_length=$(awk 'BEGIN{FS=":"} />/{print $(NF), $0}' genes.fa | awk '{print $2}' | sed 's/>//g' | awk '{ total_length += $1; count++ } END { print total_length}')
 
-echo "Total length of sequences:$Total_length"
+echo "Total length of sequences: $Total_length"
 
 #The longest and the shortest sequence lengths calculation
 Longest_sequence=$(awk 'BEGIN{FS=":"} />/{print $(NF), $0}' genes.fa | sort -n | tail -n 1 | awk '{print $2}' | sed 's/>//g')
 
-echo "Length of the longest sequence:$Longest_sequence"
+echo "Length of the longest sequence: $Longest_sequence"
 
 Shortest_sequence=$(awk 'BEGIN{FS=":"} />/{print $(NF), $0}' genes.fa | sort -n | head -n 1 | awk '{print $2}' | sed 's/>//g')
 
-echo "Length of the shortest sequence:$Shortest_sequence"
+echo "Length of the shortest sequence: $Shortest_sequence"
 
 #Average sequence length calculation 
 Avg_length=$(awk 'BEGIN{FS=":"} />/{print $(NF), $0}' genes.fa | awk '{print $2}' | sed 's/>//g' | awk '{total_length += $1;
