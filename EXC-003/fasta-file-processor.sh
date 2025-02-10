@@ -6,7 +6,7 @@ do
 #Count sequences
 num_sequences=$(grep '>' "$fasta" | wc -l)
 
-echo "Number of sequences:$num_sequences"
+echo "Number of sequences: $num_sequences"
 
 #Total Length Calculation
 Total_length=$(awk 'BEGIN{FS=":"} />/{print $(NF), $0}' genes.fa | awk '{print $2}' | sed 's/>//g' | awk '{ total_length += $1; count++ } END { print total_length}')
